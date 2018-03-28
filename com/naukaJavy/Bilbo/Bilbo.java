@@ -3,13 +3,40 @@ package com.naukaJavy.Bilbo;
 import java.util.List;
 
 public class Bilbo extends Winner {
-    private List<Treasure> treasures;
-
-    public int getSumOfTreasureSize() {
-        return sumOfTreasureSize;
+    public List<Treasure> getTreasuresToShare() {
+        return treasuresToShare;
     }
 
-    private int sumOfTreasureSize=0;
+    private List<Treasure> treasures;
+
+    public float sizeOfTreasuresInBags(List<Bag> bags) {
+        float size = 0;
+        for (Bag bag : bags) {
+            size += bag.fillLevel() * bag.getSize();
+        }
+        return size;
+    }
+
+    public float sizeOfDwarfsTreasures(List<Dwarf> dwarf) {
+        float size = 0;
+        for (Dwarf dwarff : dwarf) {
+            for (Treasure treasure : dwarff.getTreasures())
+                size += treasure.getSize();
+        }
+        return size;
+    }
+
+    public float sizeOfBilbosTreasures() {
+        float size = 0;
+        for (Treasure treasure : treasures) {
+            size += treasure.getSize();
+        }
+        return size;
+    }
+
+    public float sizeOfAllSharedTreasures(List<Bag> bags, List<Dwarf> dwarf){
+        return sizeOfBilbosTreasures()+sizeOfDwarfsTreasures(dwarf)+sizeOfTreasuresInBags(bags);
+    }
 
     @Override
     public List<Treasure> getTreasures() {
@@ -30,6 +57,7 @@ public class Bilbo extends Winner {
             treasuresToShare.remove(treasure);
             for (Dwarf dwarf : dwarves) {
                 if (!dwarvesOnBlackList.contains(dwarf)) {
+                 //   float sizeOfAllSharedTreasures = sizeOfAllSharedTreasures(bags,dwarf);
                     if (dwarf.doesGetNextTreasure()) {  //dwarf bierze skarb
                         dwarf.getBag().treasures.add(treasure);  //dodajemy skarb do listy dwarfa
                         if (dwarf.getBag().checkIfOverloaded()) {  //sprawdzamy czy worek przepełniony
@@ -40,20 +68,20 @@ public class Bilbo extends Winner {
                             }
                         }
                     } else {
-                        for(Treasure treasuresInBag:dwarf.getBag().treasures)
-                        dwarf.getTreasures().add(treasure);  //jesli nie jest przeladowany, dodajemy skarb do listy dwarfa
+                        for (Treasure treasuresInBag : dwarf.getBag().treasures)
+                            dwarf.getTreasures().add(treasuresInBag);  //jesli nie jest przeladowany, dodajemy skarb do listy dwarfa
                         dwarvesOnBlackList.add(dwarf);
                     }
                 }
-                if(dwarvesOnBlackList.size() == dwarves.size()){
-                    for(Dwarf onBlackList:dwarvesOnBlackList){
+                if (dwarvesOnBlackList.size() == dwarves.size()) {
+                    for (Dwarf onBlackList : dwarvesOnBlackList) {
                         dwarvesOnBlackList.remove(onBlackList);  //jesli wszystkie krasnoludy albo wzily skarby, albo oddaly Bilbo, to zaczynamy zabawe od nowa
                     }
                 }
 
             }
         }
-       // mozna na koncu zrobic jakas tablice z przypisanymi skarbami do Bilbo i krasnoludów
+        // mozna na koncu zrobic jakas tablice z przypisanymi skarbami do Bilbo i krasnoludów
     }
 
 }

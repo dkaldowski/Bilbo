@@ -5,23 +5,22 @@ import java.util.List;
 
 
 public class Bag {
-    private int size;
+    private float size;
     public List<Treasure> treasures; //lista skarbow w worku, to powinno być w klasie Bilbo private
 
 
-
-    public Bag(int size, List<Treasure> treasures) {
+    public Bag(float size, List<Treasure> treasures) {
         this.size = size;
         this.treasures = treasures;
     }
 
-    public int getSize() {
+    public float getSize() {
         return size;
     }
 
     //poziom wypelnienia worka
-    public double fillLevel() {
-        int sumSizeOfTreasure = 0;
+    public float fillLevel() {
+        float sumSizeOfTreasure = 0;
         for (Treasure treasure : treasures) {
             sumSizeOfTreasure += treasure.getSize();
         }
@@ -35,7 +34,7 @@ public class Bag {
         else return false;
     }
 
-    public Bag(int size) {
+    public Bag(float size) {
         this.size = size;
     }
 
