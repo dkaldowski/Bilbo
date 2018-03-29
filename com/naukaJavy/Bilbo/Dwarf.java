@@ -3,6 +3,10 @@ package com.naukaJavy.Bilbo;
 import java.util.List;
 
 public abstract class Dwarf extends Winner {
+    public Dwarf(Bag bag) {
+        this.bag = bag;
+    }
+
     public abstract boolean doesGetNextTreasure();
 
     private List<Treasure> treasures;
