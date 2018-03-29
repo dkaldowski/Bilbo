@@ -3,6 +3,10 @@ package com.naukaJavy.Bilbo;
 public class DwarfStat extends Dwarf {
     private Object List;
 
+  /*  public DwarfStat(Bag bag) {
+        super(bag);
+    } */
+
 
  /*   public float expectedValue(List<Bag> bags, List<Dwarf> dwarf, int i) {
         float sumOfSize = Bilbo.sizeOfAllSharedTreasures(bags, dwarf);

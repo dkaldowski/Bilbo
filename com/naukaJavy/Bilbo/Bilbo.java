@@ -55,6 +55,11 @@ public class Bilbo extends Winner {
     private List<Dwarf> dwarvesOnBlackList;
 
     public Map rozdziel(List<Treasure> treasuresToShare, List<Dwarf> dwarves, List<Bag> bags) {
+        int i = 0;
+        for(Dwarf dwarf:dwarves){
+            dwarf.setBag(bags.get(i));
+            i++;
+        }
         Map<Winner, Treasure> winnersWithTreasures = new HashMap<Winner, Treasure>();
         for (Treasure treasure : treasuresToShare) {
             treasuresToShare.remove(treasure);
