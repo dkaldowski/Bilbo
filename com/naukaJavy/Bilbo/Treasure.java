@@ -7,6 +7,13 @@ public class Treasure {
         return size;
     }
 
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder();
+        result.append(getSize());
+        return result.toString();
+    }
+
     public Treasure(float size) {
         this.size = size;
     }

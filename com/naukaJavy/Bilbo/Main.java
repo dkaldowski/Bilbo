@@ -12,21 +12,27 @@ public class Main {
         List<Treasure> treasures = new ArrayList<Treasure>();
 
         //testowe dane
-        Bag bag1 = new Bag(10);
-        Bag bag2 = new Bag(15);
-        Dwarf dwarf1 = new DwarfPercent(0.7);
-        Dwarf dwarf2 = new DwarfPercent(0.6);
+        Bag bag1 = new Bag(8);
+        Bag bag2 = new Bag(10);
+        Dwarf dwarf1 = new RandomDwarf();
+        Dwarf dwarf2 = new RandomDwarf();
         bags.add(bag1);
         bags.add(bag2);
         dwarves.add(dwarf1);
         dwarves.add(dwarf2);
-        for (int i = 0; i < 10; i++) {
-            Treasure treasure = new Treasure(i+1);
+        for (int i = 1; i <= 6; i++) {
+            Treasure treasure = new Treasure(i);
             treasures.add(treasure);
         }
 
 
+     //   System.out.println(bilbo.rozdziel(treasures, dwarves, bags));
+
+      //  bilbo.rozdziel(treasures, dwarves, bags).forEach(System.out.println());
+
         System.out.println(bilbo.rozdziel(treasures, dwarves, bags));
+       // System.out.println(Collections.singletonList(bilbo.rozdziel(treasures, dwarves, bags)));
+
 
 
         //dwarf z workiem?

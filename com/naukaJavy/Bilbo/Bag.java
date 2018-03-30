@@ -6,7 +6,12 @@ import java.util.List;
 
 public class Bag {
     private float size;
-    public List<Treasure> treasures; //lista skarbow w worku, to powinno być w klasie Bilbo private
+
+    public List<Treasure> getTreasures() {
+        return treasures;
+    }
+
+    private List<Treasure> treasures = new ArrayList<Treasure>(); //lista skarbow w worku, to powinno być w klasie Bilbo private
 
 
     public Bag(float size, List<Treasure> treasures) {
@@ -21,10 +26,8 @@ public class Bag {
     //poziom wypelnienia worka
     public float fillLevel() {
         float sumSizeOfTreasure = 0;
-        for (Treasure treasure : treasures) {
-            sumSizeOfTreasure += treasure.getSize();
-        }
-        return sumSizeOfTreasure / this.getSize();
+        for (Treasure treasure : getTreasures()) sumSizeOfTreasure += treasure.getSize();
+        return (sumSizeOfTreasure / this.getSize());
     }
 
     //czy przeladowany

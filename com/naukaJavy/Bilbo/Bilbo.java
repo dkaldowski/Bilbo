@@ -10,7 +10,7 @@ public class Bilbo extends Winner {
         return treasuresToShare;
     }
 
-    private List<Treasure> treasures;
+    private List<Treasure> treasures = new ArrayList<>();
 
     /*    public float sizeOfTreasuresInBags(List<Bag> bags) {
             float size = 0;
@@ -41,63 +41,56 @@ public class Bilbo extends Winner {
             return sizeOfBilbosTreasures()+sizeOfDwarfsTreasures(dwarf)+sizeOfTreasuresInBags(bags);
         }
     */
-    @Override
-    public List<Treasure> getTreasures() {
-        return treasures;
-    }
 
-    @Override
-    public void setTreasures(List<Treasure> treasures) {
-        this.treasures = treasures;
-    }
 
     private List<Treasure> treasuresToShare;
-    private List<Dwarf> dwarvesOnBlackList;
+    private List<Dwarf> dwarvesOnBlackList = new ArrayList<Dwarf>();
+
 
     public Map rozdziel(List<Treasure> treasuresToShare, List<Dwarf> dwarves, List<Bag> bags) {
         int i = 0;
-        for(Dwarf dwarf:dwarves){
+        for (Dwarf dwarf : dwarves) {
             dwarf.setBag(bags.get(i));
             i++;
         }
-        Map<Winner, Treasure> winnersWithTreasures = new HashMap<Winner, Treasure>();
+        Map<Winner, List<Treasure>> winnersWithTreasures = new HashMap<>();
         for (Treasure treasure : treasuresToShare) {
-            treasuresToShare.remove(treasure);
             for (Dwarf dwarf : dwarves) {
                 if (!dwarvesOnBlackList.contains(dwarf)) {
                     //   float sizeOfAllSharedTreasures = sizeOfAllSharedTreasures(bags,dwarf);
+                    Bag bag = dwarf.getBag();
                     if (dwarf.doesGetNextTreasure()) {  //dwarf bierze skarb
-                        dwarf.getBag().treasures.add(treasure);  //dodajemy skarb do listy dwarfa
-                        if (dwarf.getBag().checkIfOverloaded()) {  //sprawdzamy czy worek przepełniony
-                            for (Treasure dwarfsTreasure : dwarf.getBag().treasures) {  //jesli tak to jedziemy po wszystkih skarbach dwarfa
-                                treasures.add(dwarfsTreasure); // i dodajemy do skarbow Bilba  ;   czy tu nie powinno być setTreasures?
-                                dwarf.getBag().treasures.remove(dwarfsTreasure);
-                                dwarvesOnBlackList.add(dwarf); //dwarfa dodajemy do czarnej listy
-                            }
+                        bag.getTreasures().add(treasure);  //dodajemy skarb do listy dwarfa
+                        if (bag.checkIfOverloaded()) {  //sprawdzamy czy worek przepełniony
+                            treasures.addAll(bag.getTreasures());   // przerzucamy skarby do Bilbo
+                            bag.getTreasures().clear(); //czyścimy worek Bilba
+                            dwarvesOnBlackList.add(dwarf); //dwarfa dodajemy do czarnej listy
                         }
+                        break;
                     } else {
-                        for (Treasure treasuresInBag : dwarf.getBag().treasures)
+                        for (Treasure treasuresInBag : bag.getTreasures()) {
                             dwarf.getTreasures().add(treasuresInBag);  //jesli nie jest przeladowany, dodajemy skarb do listy dwarfa
+                        }
+                        bag.getTreasures().clear();
                         dwarvesOnBlackList.add(dwarf);
                     }
                 }
-                if (dwarvesOnBlackList.size() == dwarves.size()) {
-                    for (Dwarf onBlackList : dwarvesOnBlackList) {
-                        dwarvesOnBlackList.remove(onBlackList);  //jesli wszystkie krasnoludy albo wzily skarby, albo oddaly Bilbo, to zaczynamy zabawe od nowa
-                    }
+            }
+            if (dwarvesOnBlackList.size() == dwarves.size()) {
+                if(!treasures.contains(treasure)) {
+                    treasures.add(treasure);
                 }
+                dwarvesOnBlackList.clear();  //jesli wszystkie krasnoludy albo wzily skarby, albo oddaly Bilbo, to zaczynamy zabawe od nowa
+            }
+        }
 
-            }
-        }
-        Bilbo bilbo = new Bilbo();
-        for (Treasure treasures : getTreasures()) {
-            winnersWithTreasures.put(bilbo, treasures);
-        }
+        winnersWithTreasures.put(this, treasures);
+
         for (Dwarf dwarf : dwarves) {
-            for (Treasure treasures : dwarf.getTreasures()) {
-                winnersWithTreasures.put(dwarf, treasures);
-            }
+
+            winnersWithTreasures.put(dwarf, dwarf.getTreasures());
         }
+
         return winnersWithTreasures;
     }
 
