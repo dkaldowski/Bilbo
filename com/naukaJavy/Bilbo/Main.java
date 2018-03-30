@@ -14,8 +14,8 @@ public class Main {
         //testowe dane
         Bag bag1 = new Bag(8);
         Bag bag2 = new Bag(10);
-        Dwarf dwarf1 = new RandomDwarf();
-        Dwarf dwarf2 = new RandomDwarf();
+        Dwarf dwarf1 = new DwarfPercent(0.7);
+        Dwarf dwarf2 = new DwarfPercent(0.5);
         bags.add(bag1);
         bags.add(bag2);
         dwarves.add(dwarf1);
