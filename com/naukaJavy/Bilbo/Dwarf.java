@@ -9,7 +9,7 @@ public abstract class Dwarf extends Winner {
     }*/
 
 
-    public abstract boolean doesGetNextTreasure();
+    public abstract boolean doesGetNextTreasure(List<Treasure> sharedTreasures);
 
     private List<Treasure> treasures = new ArrayList<Treasure>();
     private Bag bag;

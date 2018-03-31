@@ -1,5 +1,7 @@
 package com.naukaJavy.Bilbo;
 
+import java.util.List;
+
 public class DwarfPercent extends Dwarf  {
     private double percent;
 
@@ -19,7 +21,7 @@ public class DwarfPercent extends Dwarf  {
         this.percent = percent;
     }*/
 
-    public boolean doesGetNextTreasure() {
+    public boolean doesGetNextTreasure(List<Treasure> sharedTreasures) {
         if (getBag().fillLevel() > getPercent())
             return false;
         else return true;

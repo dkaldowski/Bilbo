@@ -12,6 +12,12 @@ public class Bilbo extends Winner {
 
     private List<Treasure> treasures = new ArrayList<>();
 
+    public List<Treasure> getSharedTreasures() {
+        return sharedTreasures;
+    }
+
+    private List<Treasure> sharedTreasures = new ArrayList<>();
+
     /*    public float sizeOfTreasuresInBags(List<Bag> bags) {
             float size = 0;
             for (Bag bag : bags) {
@@ -42,7 +48,7 @@ public class Bilbo extends Winner {
         }
     */
 
-
+private boolean isExistsDwarfStat= false;
     private List<Treasure> treasuresToShare;
     private List<Dwarf> dwarvesOnBlackList = new ArrayList<Dwarf>();
 
@@ -52,14 +58,18 @@ public class Bilbo extends Winner {
         for (Dwarf dwarf : dwarves) {
             dwarf.setBag(bags.get(i));
             i++;
+            if(dwarf instanceof DwarfStat){
+                isExistsDwarfStat = true;
+            }
         }
         Map<Winner, List<Treasure>> winnersWithTreasures = new HashMap<>();
         for (Treasure treasure : treasuresToShare) {
+            sharedTreasures.add(treasure);
             for (Dwarf dwarf : dwarves) {
                 if (!dwarvesOnBlackList.contains(dwarf)) {
                     //   float sizeOfAllSharedTreasures = sizeOfAllSharedTreasures(bags,dwarf);
                     Bag bag = dwarf.getBag();
-                    if (dwarf.doesGetNextTreasure()) {  //dwarf bierze skarb
+                    if (dwarf.doesGetNextTreasure(sharedTreasures)) {  //dwarf bierze skarb
                         bag.getTreasures().add(treasure);  //dodajemy skarb do listy dwarfa
                         if (bag.checkIfOverloaded()) {  //sprawdzamy czy worek przepełniony
                             treasures.addAll(bag.getTreasures());   // przerzucamy skarby do Bilbo
