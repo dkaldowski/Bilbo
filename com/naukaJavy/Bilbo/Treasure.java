@@ -16,7 +16,7 @@ public class Treasure {
 
     public void setSize(double size) {
         this.size = size;
-        if(this.size<=0) throw new IllegalArgumentException("Treasure size has to be greater than 0!");
+        if (this.size <= 0) throw new IllegalArgumentException("Treasure size has to be greater than 0!");
     }
 
     public Treasure() {
@@ -24,6 +24,6 @@ public class Treasure {
 
     public Treasure(double size) {
         this.size = size;
-        if(this.size<=0) throw new IllegalArgumentException("Treasure size has to be greater than 0!");
+        if (this.size <= 0) throw new IllegalArgumentException("Treasure size has to be greater than 0!");
     }
 }
