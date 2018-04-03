@@ -18,37 +18,7 @@ public class Bilbo extends Winner {
 
     private List<Treasure> sharedTreasures = new ArrayList<>();
 
-    /*    public float sizeOfTreasuresInBags(List<Bag> bags) {
-            float size = 0;
-            for (Bag bag : bags) {
-                size += bag.fillLevel() * bag.getSize();
-            }
-            return size;
-        }
-
-        public float sizeOfDwarfsTreasures(List<Dwarf> dwarf) {
-            float size = 0;
-            for (Dwarf dwarff : dwarf) {
-                for (Treasure treasure : dwarff.getTreasures())
-                    size += treasure.getSize();
-            }
-            return size;
-        }
-
-        public float sizeOfBilbosTreasures() {
-            float size = 0;
-            for (Treasure treasure : treasures) {
-                size += treasure.getSize();
-            }
-            return size;
-        }
-
-        public float sizeOfAllSharedTreasures(List<Bag> bags, List<Dwarf> dwarf){
-            return sizeOfBilbosTreasures()+sizeOfDwarfsTreasures(dwarf)+sizeOfTreasuresInBags(bags);
-        }
-    */
-
-private boolean isExistsDwarfStat= false;
+    private boolean isExistsDwarfStat = false;
     private List<Treasure> treasuresToShare;
     private List<Dwarf> dwarvesOnBlackList = new ArrayList<Dwarf>();
 
@@ -58,7 +28,7 @@ private boolean isExistsDwarfStat= false;
         for (Dwarf dwarf : dwarves) {
             dwarf.setBag(bags.get(i));
             i++;
-            if(dwarf instanceof DwarfStat){
+            if (dwarf instanceof DwarfStat) {
                 isExistsDwarfStat = true;
             }
         }
@@ -87,7 +57,7 @@ private boolean isExistsDwarfStat= false;
                 }
             }
             if (dwarvesOnBlackList.size() == dwarves.size()) {
-                if(!treasures.contains(treasure)) {
+                if (!treasures.contains(treasure)) {
                     treasures.add(treasure);
                 }
                 dwarvesOnBlackList.clear();  //jesli wszystkie krasnoludy albo wzily skarby, albo oddaly Bilbo, to zaczynamy zabawe od nowa

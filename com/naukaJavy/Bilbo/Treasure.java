@@ -1,9 +1,9 @@
 package com.naukaJavy.Bilbo;
 
 public class Treasure {
-    private float size;
+    private double size;
 
-    public float getSize() {
+    public double getSize() {
         return size;
     }
 
@@ -14,7 +14,16 @@ public class Treasure {
         return result.toString();
     }
 
-    public Treasure(float size) {
+    public void setSize(double size) {
         this.size = size;
+        if(this.size<=0) throw new IllegalArgumentException("Treasure size has to be greater than 0!");
+    }
+
+    public Treasure() {
+    }
+
+    public Treasure(double size) {
+        this.size = size;
+        if(this.size<=0) throw new IllegalArgumentException("Treasure size has to be greater than 0!");
     }
 }

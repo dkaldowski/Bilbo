@@ -5,7 +5,7 @@ import java.util.List;
 
 
 public class Bag {
-    private float size;
+    private double size;
 
     public List<Treasure> getTreasures() {
         return treasures;
@@ -13,19 +13,22 @@ public class Bag {
 
     private List<Treasure> treasures = new ArrayList<Treasure>(); //lista skarbow w worku, to powinno być w klasie Bilbo private
 
-
-    public Bag(float size, List<Treasure> treasures) {
+    public Bag(double size, List<Treasure> treasures) {
         this.size = size;
         this.treasures = treasures;
+
+            if(this.size<=0) throw new IllegalArgumentException("Bag size has to be greater than 0!");
+
+
     }
 
-    public float getSize() {
+    public double getSize() {
         return size;
     }
 
     //poziom wypelnienia worka
-    public float fillLevel() {
-        float sumSizeOfTreasure = 0;
+    public double fillLevel() {
+        double sumSizeOfTreasure = 0.0;
         for (Treasure treasure : getTreasures()) sumSizeOfTreasure += treasure.getSize();
         return (sumSizeOfTreasure / this.getSize());
     }
@@ -39,14 +42,7 @@ public class Bag {
 
     public Bag(float size) {
         this.size = size;
+        if(this.size<=0) throw new IllegalArgumentException("Bag size has to be greater than 0!");
     }
 
-
- /*   public Dwarf getDwarf() {
-        return dwarf;
-    }
-
-    public void setDwarf(Dwarf dwarf) {
-        this.dwarf = dwarf;
-    }*/
 }
