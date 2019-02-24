@@ -33,7 +33,7 @@ public class Main {
         System.out.println(bilbo.rozdziel(treasures, dwarves, bags));
        // System.out.println(Collections.singletonList(bilbo.rozdziel(treasures, dwarves, bags)));
 
-        System.out.println("master commit");
+        System.out.println("test3");
 
         //dwarf z workiem?
         //bag z size
