@@ -1,15 +1,13 @@
 package com.naukaJavy.Bilbo;
 
-import org.junit.Before;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 class BagTest {
 
@@ -26,7 +24,7 @@ class BagTest {
             treasures.add(treasure);
         }
         Bag bag = new Bag(20, treasures);
-        Assertions.assertEquals(0.6, bag.fillLevel());
+        assertEquals(0.6, bag.fillLevel());
     }
 
     @Test
