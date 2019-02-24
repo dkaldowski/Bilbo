@@ -35,6 +35,8 @@ public class Main {
 
         System.out.println("new feature2 na podstawie feature test1");
 
+        System.out.println("feature2 na podstawie feature test1");
+
 
         //dwarf z workiem?
         //bag z size
